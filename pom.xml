@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.easy</groupId>
-    <artifactId>my-core</artifactId>
+    <artifactId>EasyX-Tool</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>easy-log</module>
