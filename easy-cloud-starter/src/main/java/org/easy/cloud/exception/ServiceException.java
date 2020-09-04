@@ -14,41 +14,35 @@
  *  this software without specific prior written permission.
  *  Author: Chill 庄骞 (smallchill@163.com)
  */
-package org.easy.secure.exception;
+package org.easy.cloud.exception;
 
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.easy.tool.web.IResultCode;
 import org.easy.tool.web.ResultCode;
 
 
 /**
- * Secure异常
+ * 业务异常
  *
  * @author Chill
  */
-
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class SecureException extends  RuntimeException {
+public class ServiceException extends RuntimeException {
 	private static final long serialVersionUID = 2359767895161832954L;
 
 	@Getter
 	private final IResultCode resultCode;
 
-	public SecureException(String message) {
+	public ServiceException(String message) {
 		super(message);
 		this.resultCode = ResultCode.INTERNAL_SERVER_ERROR;
 	}
 
-	public SecureException(IResultCode resultCode) {
+	public ServiceException(IResultCode resultCode) {
 		super(resultCode.getMessage());
 		this.resultCode = resultCode;
 	}
 
-	public SecureException(IResultCode resultCode, Throwable cause) {
+	public ServiceException(IResultCode resultCode, Throwable cause) {
 		super(cause);
 		this.resultCode = resultCode;
 	}
@@ -66,4 +60,5 @@ public class SecureException extends  RuntimeException {
 	public Throwable doFillInStackTrace() {
 		return super.fillInStackTrace();
 	}
+
 }

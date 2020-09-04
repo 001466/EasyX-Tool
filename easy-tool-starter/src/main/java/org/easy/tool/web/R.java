@@ -149,7 +149,7 @@ public class R<T>  implements Serializable {
         return new R<>(false, ResultCode.FAILURE.getCode(), ResultCode.FAILURE.getMessage());
     }
 
-    public static <T> R<T> fail(ResultCode code) {
+    public static <T> R<T> fail(IResultCode code) {
         return new R<>(false, code == null ? null : code.getCode(), code.getMessage());
     }
 
@@ -157,7 +157,7 @@ public class R<T>  implements Serializable {
         return new R<>(false, ResultCode.FAILURE.getCode(), msg);
     }
 
-    public static <T> R<T> fail(ResultCode code, String msg) {
+    public static <T> R<T> fail(IResultCode code, String msg) {
         return new R<>(false, code == null ? null : code.getCode(), msg);
     }
 

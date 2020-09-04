@@ -3,6 +3,8 @@ package org.easy.tool.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import org.easy.tool.web.IResultCode;
 import org.easy.tool.web.ResultCode;
 
 /**
@@ -15,20 +17,42 @@ import org.easy.tool.web.ResultCode;
 public class CustomException extends RuntimeException {
     private static final long serialVersionUID = 2359767895161832954L;
 
-    protected ResultCode code;
+    @Getter
+    private final IResultCode resultCode;
 
-    public CustomException(ResultCode code, String message) {
-        super(message);
-        this.code = code;
-    }
 
-    public CustomException(ResultCode code) {
-        super(code.getMessage());
-        this.code = code;
-    }
 
     public CustomException(String message) {
         super(message);
-        this.code = ResultCode.USER_NOT_FOUND;
+        this.resultCode = ResultCode.INTERNAL_SERVER_ERROR;
+    }
+
+    public CustomException(IResultCode resultCode) {
+        super(resultCode.getMessage());
+        this.resultCode = resultCode;
+    }
+
+    public CustomException(IResultCode resultCode, Throwable cause) {
+        super(cause);
+        this.resultCode = resultCode;
+    }
+
+    public CustomException(IResultCode resultCode, String cause) {
+        super(cause);
+        this.resultCode = resultCode;
+    }
+
+    /**
+     * 提高性能
+     *
+     * @return Throwable
+     */
+    @Override
+    public Throwable fillInStackTrace() {
+        return this;
+    }
+
+    public Throwable doFillInStackTrace() {
+        return super.fillInStackTrace();
     }
 }
