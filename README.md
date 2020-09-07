@@ -20,9 +20,8 @@ public class DictController {
 }
 ```
 #### 集成自定义的错误封装返回
--error
- -BladeErrorAttributes
-  -BladeErrorController
-  -BladeRestExceptionTranslator
-  -RestExceptionTranslator
+ * -BladeErrorAttributes
+ * -BladeErrorController
+ * -BladeRestExceptionTranslator
+ * -RestExceptionTranslator
   
