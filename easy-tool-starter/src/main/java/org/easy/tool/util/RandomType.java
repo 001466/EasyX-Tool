@@ -19,7 +19,6 @@ package org.easy.tool.util;
 /**
  * 生成的随机数类型
  *
- * @author L.cm
  */
 public enum RandomType {
 	/**

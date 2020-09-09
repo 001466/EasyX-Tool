@@ -12,7 +12,6 @@ import java.util.function.Supplier;
  * Lambda 受检异常处理
  * https://segmentfault.com/a/1190000007832130
  *
- * @author Chill
  */
 public class Try {
 

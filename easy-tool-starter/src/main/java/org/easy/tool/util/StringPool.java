@@ -19,7 +19,6 @@ package org.easy.tool.util;
 /**
  * 静态 String 池
  *
- * @author L.cm
  */
 public interface StringPool {
 

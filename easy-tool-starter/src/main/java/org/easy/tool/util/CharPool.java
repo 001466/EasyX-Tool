@@ -19,7 +19,6 @@ package org.easy.tool.util;
 /**
  * char 常量池
  *
- * @author L.cm
  */
 public interface CharPool {
 

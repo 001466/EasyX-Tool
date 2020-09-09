@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * swagger资源配置
  *
- * @author Chill
  */
 @Configuration
 public class SwaggerWebConfiguration implements WebMvcConfigurer {

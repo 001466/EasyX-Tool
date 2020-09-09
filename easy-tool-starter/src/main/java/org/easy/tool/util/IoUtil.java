@@ -26,7 +26,6 @@ import java.nio.charset.Charset;
 /**
  * IOUtil
  *
- * @author L.cm
  */
 @UtilityClass
 public class IoUtil extends org.springframework.util.StreamUtils {

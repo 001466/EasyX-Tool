@@ -26,7 +26,6 @@ import lombok.Getter;
  * https://developer.github.com/v3/media/
  * </p>
  *
- * @author L.cm
  */
 @Getter
 public class VersionMediaType {

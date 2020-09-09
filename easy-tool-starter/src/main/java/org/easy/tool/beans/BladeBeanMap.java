@@ -10,7 +10,6 @@ import java.security.ProtectionDomain;
 /**
  * 重写 cglib BeanMap，支持链式bean
  *
- * @author L.cm
  */
 public abstract class BladeBeanMap extends BeanMap {
 	protected BladeBeanMap() {

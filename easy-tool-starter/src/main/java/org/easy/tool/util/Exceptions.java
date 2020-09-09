@@ -25,7 +25,6 @@ import java.lang.reflect.UndeclaredThrowableException;
 /**
  * 异常处理工具类
  *
- * @author L.cm
  */
 @UtilityClass
 public class Exceptions {

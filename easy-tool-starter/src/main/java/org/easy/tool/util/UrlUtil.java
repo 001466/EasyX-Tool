@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 /**
  * url处理工具类
  *
- * @author L.cm
  */
 public class UrlUtil extends org.springframework.web.util.UriUtils {
 

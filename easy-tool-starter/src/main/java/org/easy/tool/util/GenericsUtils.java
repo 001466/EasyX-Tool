@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * 泛型工具类
- * @author guwenren
  *
  */
 public class GenericsUtils {

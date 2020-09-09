@@ -23,7 +23,6 @@ import java.nio.charset.StandardCharsets;
 /**
  * 字符集工具类
  *
- * @author L.cm
  */
 public class Charsets {
 

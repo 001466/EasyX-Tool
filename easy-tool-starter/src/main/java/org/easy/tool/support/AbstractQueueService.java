@@ -10,7 +10,6 @@ import java.util.concurrent.*;
  * QueueService abstract class
  *
  * @param <T>
- * @author Easily
  */
 
 @Slf4j

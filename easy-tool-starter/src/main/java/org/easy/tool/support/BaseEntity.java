@@ -16,7 +16,6 @@ import java.util.Locale;
 
 /**
  *
- * @author winall
  *
  */
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)

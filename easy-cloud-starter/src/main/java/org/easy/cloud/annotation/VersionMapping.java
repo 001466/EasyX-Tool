@@ -30,7 +30,6 @@ import java.lang.annotation.*;
  *     2. Accept 版本：application/vnd.blade.VERSION+json
  * </p>
  *
- * @author L.cm
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

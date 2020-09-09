@@ -50,7 +50,6 @@ import java.util.function.Supplier;
 /**
  * 工具包集合，工具类快捷方式
  *
- * @author L.cm
  */
 public class Func {
 

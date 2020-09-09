@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 /**
  * 字符串切分器
  *
- * @author Looly
  */
 public class StrSpliter {
 

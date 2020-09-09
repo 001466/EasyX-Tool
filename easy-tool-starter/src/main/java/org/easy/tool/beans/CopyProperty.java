@@ -5,7 +5,6 @@ import java.lang.annotation.*;
 /**
  * copy 字段 配置
  *
- * @author L.cm
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

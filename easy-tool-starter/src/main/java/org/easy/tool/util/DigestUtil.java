@@ -32,7 +32,6 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 加密相关工具类直接使用Spring util封装，减少jar依赖
  *
- * @author L.cm
  */
 @UtilityClass
 public class DigestUtil extends DigestUtils {

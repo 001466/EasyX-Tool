@@ -27,7 +27,6 @@ import java.util.Map;
 /**
  * spring 工具类
  *
- * @author Chill
  */
 @Slf4j
 public class SpringUtil implements ApplicationContextAware {

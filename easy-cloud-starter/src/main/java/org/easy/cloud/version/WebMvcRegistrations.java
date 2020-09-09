@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 /**
  * url版本号处理
  *
- * @author L.cm
  */
 public class WebMvcRegistrations implements org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations {
 	@Override

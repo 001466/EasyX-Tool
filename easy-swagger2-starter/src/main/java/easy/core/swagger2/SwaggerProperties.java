@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * SwaggerProperties
  *
- * @author Chill
  */
 @Setter
 @Getter

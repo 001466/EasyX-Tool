@@ -14,7 +14,6 @@ import java.time.LocalTime;
 /**
  * java 8 时间默认序列化
  *
- * @author L.cm
  */
 public class BladeJavaTimeModule extends SimpleModule {
 

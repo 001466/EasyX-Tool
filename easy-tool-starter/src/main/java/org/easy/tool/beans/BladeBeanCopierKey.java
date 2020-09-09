@@ -7,7 +7,6 @@ import lombok.Getter;
 /**
  * copy key
  *
- * @author L.cm
  */
 @Getter
 @EqualsAndHashCode

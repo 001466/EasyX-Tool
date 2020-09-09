@@ -21,7 +21,6 @@ import java.lang.annotation.*;
 /**
  * header 版本 处理
  *
- * @author L.cm
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

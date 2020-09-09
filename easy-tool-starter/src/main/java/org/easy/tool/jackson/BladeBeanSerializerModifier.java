@@ -28,7 +28,6 @@ import java.util.List;
  * array []
  * Object {}
  *
- * @author L.cm
  */
 public class BladeBeanSerializerModifier extends BeanSerializerModifier {
     @Override

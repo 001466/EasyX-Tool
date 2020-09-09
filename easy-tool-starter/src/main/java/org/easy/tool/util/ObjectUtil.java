@@ -21,7 +21,6 @@ import org.springframework.lang.Nullable;
 /**
  * 对象工具类
  *
- * @author L.cm
  */
 public class ObjectUtil extends org.springframework.util.ObjectUtils {
 

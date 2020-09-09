@@ -11,7 +11,6 @@ package org.easy.tool.util;
 //
 ///**
 // * 包装类
-// * @author liuyazhuang
 // *
 // * @param <T>
 // */

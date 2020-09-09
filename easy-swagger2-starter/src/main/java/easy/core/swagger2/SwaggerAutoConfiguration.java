@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * swagger配置
  *
- * @author Chill
  */
 @Configuration
 @EnableSwagger2

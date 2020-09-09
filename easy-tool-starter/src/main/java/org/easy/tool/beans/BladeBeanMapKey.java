@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 /**
  * bean map key，提高性能
  *
- * @author L.cm
  */
 @EqualsAndHashCode
 @AllArgsConstructor

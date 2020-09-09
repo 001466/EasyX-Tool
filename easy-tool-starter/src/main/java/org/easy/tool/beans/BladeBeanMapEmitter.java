@@ -14,7 +14,6 @@ import java.util.Map;
 /**
  * 重写 cglib BeanMap 处理器
  *
- * @author L.cm
  */
 class BladeBeanMapEmitter extends ClassEmitter {
 	private static final Type BEAN_MAP = TypeUtils.parseType(BladeBeanMap.class.getName());

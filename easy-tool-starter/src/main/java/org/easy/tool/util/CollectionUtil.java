@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 /**
  * 集合工具类
  *
- * @author L.cm
  */
 public class CollectionUtil extends CollectionUtils {
 

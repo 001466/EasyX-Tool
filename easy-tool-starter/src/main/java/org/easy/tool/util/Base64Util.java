@@ -19,7 +19,6 @@ package org.easy.tool.util;
 /**
  * Base64工具
  *
- * @author L.cm
  */
 public class Base64Util extends org.springframework.util.Base64Utils {
 

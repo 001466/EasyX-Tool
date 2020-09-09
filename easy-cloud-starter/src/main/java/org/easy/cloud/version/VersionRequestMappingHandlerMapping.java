@@ -39,7 +39,6 @@ import java.util.Map;
  *
  * 注意：c 代表客户端版本
  *
- * @author L.cm
  */
 public class VersionRequestMappingHandlerMapping extends org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping {
 
