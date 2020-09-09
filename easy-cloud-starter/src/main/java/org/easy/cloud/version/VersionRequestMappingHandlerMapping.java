@@ -25,7 +25,6 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -42,7 +41,7 @@ import java.util.Map;
  *
  * @author L.cm
  */
-public class BladeRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
+public class VersionRequestMappingHandlerMapping extends org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping {
 
 	@Nullable
 	@Override
@@ -84,7 +83,7 @@ public class BladeRequestMappingHandlerMapping extends RequestMappingHandlerMapp
 		}
 		// 如果url版本不存在
 		if (nonUrlVersion) {
-			String vsersionMediaTypes = new BladeMediaType(apiVersion.value()).toString();
+			String vsersionMediaTypes = new VersionMediaType(apiVersion.value()).toString();
 			mappingInfoBuilder.produces(vsersionMediaTypes);
 		}
 		return mappingInfoBuilder.build();

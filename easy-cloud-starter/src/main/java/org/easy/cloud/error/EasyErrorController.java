@@ -34,9 +34,9 @@ import java.util.Map;
  *
  * @author Chill
  */
-public class BladeErrorController extends BasicErrorController {
+public class EasyErrorController extends BasicErrorController {
 
-	public BladeErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties) {
+	public EasyErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties) {
 		super(errorAttributes, errorProperties);
 	}
 

@@ -14,31 +14,38 @@
  *  this software without specific prior written permission.
  *  Author: DreamLu 卢春梦 (596392912@qq.com)
  */
+
 package org.easy.cloud.version;
 
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
-import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import lombok.Getter;
 
 /**
- * url版本号处理
+ * blade Media Types，application/vnd.github.VERSION+json
+ *
+ * <p>
+ * https://developer.github.com/v3/media/
+ * </p>
  *
  * @author L.cm
  */
-public class BladeWebMvcRegistrations implements WebMvcRegistrations {
-	@Override
-	public RequestMappingHandlerMapping getRequestMappingHandlerMapping() {
-		return new BladeRequestMappingHandlerMapping();
+@Getter
+public class VersionMediaType {
+	private static final String MEDIA_TYPE_TEMP = "application/%s+json";
+
+	private final String version;
+	private final org.springframework.http.MediaType mediaType;
+
+	public VersionMediaType(String version) {
+		this.version = version;
+		this.mediaType = org.springframework.http.MediaType.valueOf(String.format(MEDIA_TYPE_TEMP,  version));
 	}
 
 	@Override
-	public RequestMappingHandlerAdapter getRequestMappingHandlerAdapter() {
-		return null;
+	public String toString() {
+		return mediaType.toString();
 	}
 
-	@Override
-	public ExceptionHandlerExceptionResolver getExceptionHandlerExceptionResolver() {
-		return null;
+	public  static  void main(String[] arg){
+		System.err.print(new VersionMediaType("v1").toString());
 	}
 }

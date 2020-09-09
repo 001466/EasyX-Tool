@@ -45,7 +45,7 @@ import javax.servlet.Servlet;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @ConditionalOnClass({ Servlet.class, DispatcherServlet.class })
 @RestControllerAdvice
-public class BladeRestExceptionTranslator {
+public class EasyRestExceptionTranslator {
 
 	@ExceptionHandler(ServiceException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

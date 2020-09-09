@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.easy.cloud.error.BladeRestExceptionTranslator,\
+org.easy.cloud.error.EasyRestExceptionTranslator,\
 org.easy.cloud.error.RestExceptionTranslator,\
 org.easy.cloud.version.VersionMappingAutoConfiguration,\
 org.easy.cloud.config.MessageConfiguration

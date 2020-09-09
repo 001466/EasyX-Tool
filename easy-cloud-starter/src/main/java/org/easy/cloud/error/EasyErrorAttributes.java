@@ -33,7 +33,7 @@ import java.util.Map;
  * @author Chill
  */
 @Slf4j
-public class BladeErrorAttributes extends DefaultErrorAttributes {
+public class EasyErrorAttributes extends DefaultErrorAttributes {
 
 	@Override
 	public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {

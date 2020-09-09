@@ -17,7 +17,6 @@
 package org.easy.cloud.version;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,7 +31,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnWebApplication
 public class VersionMappingAutoConfiguration {
 	@Bean
-	public WebMvcRegistrations bladeWebMvcRegistrations() {
-		return new BladeWebMvcRegistrations();
+	public org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations bladeWebMvcRegistrations() {
+		return new WebMvcRegistrations();
 	}
 }
