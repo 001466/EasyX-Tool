@@ -15,9 +15,9 @@ import java.time.LocalTime;
  * java 8 时间默认序列化
  *
  */
-public class BladeJavaTimeModule extends SimpleModule {
+public class EasyJavaTimeModule extends SimpleModule {
 
-	public BladeJavaTimeModule() {
+	public EasyJavaTimeModule() {
 		super(PackageVersion.VERSION);
 		this.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeUtil.DATETIME_FORMAT));
 		this.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeUtil.DATE_FORMAT));

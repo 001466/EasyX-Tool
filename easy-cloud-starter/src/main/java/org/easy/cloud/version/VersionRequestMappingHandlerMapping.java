@@ -34,7 +34,7 @@ import java.util.Map;
  *
  * <p>
  *     url: /v1/user/{id}
- *     header: Accept application/vnd.blade.VERSION+json
+ *     header: Accept application/vnd.easy.VERSION+json
  * </p>
  *
  * 注意：c 代表客户端版本

@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 @AllArgsConstructor
-public class BladeBeanMapKey {
+public class BeanMapKey {
 	private final Class type;
 	private final int require;
 }

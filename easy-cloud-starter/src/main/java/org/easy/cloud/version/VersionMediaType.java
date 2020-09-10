@@ -20,7 +20,7 @@ package org.easy.cloud.version;
 import lombok.Getter;
 
 /**
- * blade Media Types，application/vnd.github.VERSION+json
+ * Media Types，application/vnd.github.VERSION+json
  *
  * <p>
  * https://developer.github.com/v3/media/

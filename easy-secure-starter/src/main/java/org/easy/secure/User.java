@@ -14,7 +14,7 @@ import java.util.Set;
 
 @ApiIgnore
 @NoArgsConstructor
-public class BladeUser implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 4125096758372084309L;
 
@@ -120,7 +120,7 @@ public class BladeUser implements Serializable {
 	private String path;
 
 
-	public BladeUser(final String clientId, final String tenantCode, final Long userId, final String userName, final String nickName, final String account, final String roleId, final String roleName, final String avatar, final Integer type,Set<String> authorities,String path) {
+	public User(final String clientId, final String tenantCode, final Long userId, final String userName, final String nickName, final String account, final String roleId, final String roleName, final String avatar, final Integer type, Set<String> authorities, String path) {
 		this.client_id = clientId;
 		this.tenantCode = tenantCode;
 		this.openid = String.valueOf(userId);
@@ -229,7 +229,7 @@ public class BladeUser implements Serializable {
 
     public static  void main(String[] arg){
 
-        BladeUser bladeUser=new BladeUser("clientId","tenactCode",100L,"userName","nickName","account","roleId","roleName","/xxx/avater.jpg",1,null,null);
+        User bladeUser=new User("clientId","tenactCode",100L,"userName","nickName","account","roleId","roleName","/xxx/avater.jpg",1,null,null);
         System.err.println(JsonUtil.toJson(bladeUser));
         System.err.println(JsonUtil.parse(JsonUtil.toJson(bladeUser),Map.class));
 
@@ -237,7 +237,7 @@ public class BladeUser implements Serializable {
         info=BeanUtil.toMap(bladeUser);
         System.err.println(info);
 
-        System.err.println(BeanUtil.toBean(info,BladeUser.class));
+        System.err.println(BeanUtil.toBean(info,User.class));
 
     }
 

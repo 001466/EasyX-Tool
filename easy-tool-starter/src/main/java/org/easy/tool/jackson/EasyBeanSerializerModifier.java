@@ -29,7 +29,7 @@ import java.util.List;
  * Object {}
  *
  */
-public class BladeBeanSerializerModifier extends BeanSerializerModifier {
+public class EasyBeanSerializerModifier extends com.fasterxml.jackson.databind.ser.BeanSerializerModifier {
     @Override
     public List<BeanPropertyWriter> changeProperties(
             SerializationConfig config, BeanDescription beanDesc,

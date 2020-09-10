@@ -48,26 +48,26 @@ import java.util.concurrent.ConcurrentMap;
  * </p>
  *
  */
-public abstract class BladeBeanCopier {
+public abstract class BeanCopier {
 	private static final Type CONVERTER = TypeUtils.parseType("org.springframework.cglib.core.Converter");
 	private static final Type CLASS_UTIL = TypeUtils.parseType("org.easy.tool.util.ClassUtil");
-	private static final Type BEAN_COPIER = TypeUtils.parseType(BladeBeanCopier.class.getName());
+	private static final Type BEAN_COPIER = TypeUtils.parseType(BeanCopier.class.getName());
 	private static final Type BEAN_MAP = TypeUtils.parseType(Map.class.getName());
 	private static final Signature COPY = new Signature("copy", Type.VOID_TYPE, new Type[]{Constants.TYPE_OBJECT, Constants.TYPE_OBJECT, CONVERTER});
 	private static final Signature CONVERT = TypeUtils.parseSignature("Object convert(Object, Class, Object)");
 	private static final Signature BEAN_MAP_GET = TypeUtils.parseSignature("Object get(Object)");
 	private static final Signature IS_ASSIGNABLE_VALUE = TypeUtils.parseSignature("boolean isAssignableValue(Class, Object)");
 	/**
-	 * The map to store {@link BladeBeanCopier} of source type and class type for copy.
+	 * The map to store {@link BeanCopier} of source type and class type for copy.
 	 */
-	private static final ConcurrentMap<BladeBeanCopierKey, BladeBeanCopier> BEAN_COPIER_MAP = new ConcurrentHashMap<>();
+	private static final ConcurrentMap<BeanCopierKey, BeanCopier> BEAN_COPIER_MAP = new ConcurrentHashMap<>();
 
-	public static BladeBeanCopier create(Class source, Class target, boolean useConverter) {
-		return BladeBeanCopier.create(source, target, useConverter, false);
+	public static BeanCopier create(Class source, Class target, boolean useConverter) {
+		return BeanCopier.create(source, target, useConverter, false);
 	}
 
-	public static BladeBeanCopier create(Class source, Class target, boolean useConverter, boolean nonNull) {
-		BladeBeanCopierKey copierKey = new BladeBeanCopierKey(source, target, useConverter, nonNull);
+	public static BeanCopier create(Class source, Class target, boolean useConverter, boolean nonNull) {
+		BeanCopierKey copierKey = new BeanCopierKey(source, target, useConverter, nonNull);
 		// 利用 ConcurrentMap 缓存 提高性能，接近 直接 get set
 		return BEAN_COPIER_MAP.computeIfAbsent(copierKey, key -> {
 			Generator gen = new Generator();
@@ -88,7 +88,7 @@ public abstract class BladeBeanCopier {
 	abstract public void copy(Object from, Object to, Converter converter);
 
 	public static class Generator extends AbstractClassGenerator {
-		private static final Source SOURCE = new Source(BladeBeanCopier.class.getName());
+		private static final Source SOURCE = new Source(BeanCopier.class.getName());
 		private Class source;
 		private Class target;
 		private boolean useConverter;
@@ -132,8 +132,8 @@ public abstract class BladeBeanCopier {
 		}
 
 		@Override
-		public BladeBeanCopier create(Object key) {
-			return (BladeBeanCopier) super.create(key);
+		public BeanCopier create(Object key) {
+			return (BeanCopier) super.create(key);
 		}
 
 		@Override

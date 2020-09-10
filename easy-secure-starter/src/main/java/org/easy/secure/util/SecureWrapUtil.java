@@ -2,7 +2,7 @@
 package org.easy.secure.util;
 
 import lombok.SneakyThrows;
-import org.easy.secure.BladeUser;
+import org.easy.secure.User;
 import org.easy.secure.constant.TokenConstant;
 import org.easy.tool.util.StringPool;
 import org.easy.tool.util.WebUtil;
@@ -18,38 +18,17 @@ import java.util.Set;
  */
 public class SecureWrapUtil extends SecureRawUtil {
 
-	/**
-	 * 获取用户信息
-	 *
-	 * @return BladeUser
-	 */
 
-//	public static BladeUser getUser() {
-//
-//		HttpServletRequest request = WebUtil.getRequest();
-//
-//		if (request == null) {
-//			return null;
-//		}
-//		// 优先从 request 中获取
-//		Object bladeUser = request.getAttribute(BLADE_USER_REQUEST_ATTR);
-//		if (bladeUser == null) {
-//			bladeUser = getUser(request);
-//			if (bladeUser != null) {
-//				// 设置到 request 中
-//				request.setAttribute(BLADE_USER_REQUEST_ATTR, bladeUser);
-//			}
-//		}
-//		return (BladeUser) bladeUser;
-//	}
 
-	public static BladeUser getUser() {
+
+
+	public static User getUser() {
 		HttpServletRequest request = WebUtil.getRequest();
 		if (request == null) {
 			return null;
 		}
- 		Object bladeUser = getUser(request);
-		return (BladeUser) bladeUser;
+ 		Object user = getUser(request);
+		return (User) user;
 	}
 
 	/**
@@ -58,7 +37,7 @@ public class SecureWrapUtil extends SecureRawUtil {
 	 * @return userId
 	 */
 	public static Long getUserId() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? -1 : user.getUserId();
 	}
 
@@ -68,7 +47,7 @@ public class SecureWrapUtil extends SecureRawUtil {
 	 * @return userAccount
 	 */
 	public static String getUserAccount() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getAccount();
 	}
 
@@ -80,7 +59,7 @@ public class SecureWrapUtil extends SecureRawUtil {
 	 * @return userName
 	 */
 	public static String getUserName() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getUserName();
 	}
 
@@ -91,13 +70,13 @@ public class SecureWrapUtil extends SecureRawUtil {
 	 * @return userName
 	 */
 	public static String getUserRole() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getRoleName();
 	}
 
 
 	public static Set<String> getUserPermissions() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? null : user.getPermissions();
 	}
 
@@ -108,7 +87,7 @@ public class SecureWrapUtil extends SecureRawUtil {
 	 * @return tenantCode
 	 */
 	public static String getTenantCode() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getTenantCode();
 	}
 
@@ -119,7 +98,7 @@ public class SecureWrapUtil extends SecureRawUtil {
 	 * @return tenantCode
 	 */
 	public static String getClientId() {
-		BladeUser user = getUser();
+		User user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getClientId();
 	}
 

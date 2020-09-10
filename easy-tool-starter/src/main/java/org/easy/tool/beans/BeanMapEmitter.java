@@ -15,8 +15,8 @@ import java.util.Map;
  * 重写 cglib BeanMap 处理器
  *
  */
-class BladeBeanMapEmitter extends ClassEmitter {
-	private static final Type BEAN_MAP = TypeUtils.parseType(BladeBeanMap.class.getName());
+class BeanMapEmitter extends ClassEmitter {
+	private static final Type BEAN_MAP = TypeUtils.parseType(BeanMap.class.getName());
 	private static final Type FIXED_KEY_SET = TypeUtils.parseType("org.springframework.cglib.beans.FixedKeySet");
 	private static final Signature CSTRUCT_OBJECT = TypeUtils.parseConstructor("Object");
 	private static final Signature CSTRUCT_STRING_ARRAY = TypeUtils.parseConstructor("String[]");
@@ -26,7 +26,7 @@ class BladeBeanMapEmitter extends ClassEmitter {
 	private static final Signature NEW_INSTANCE = new Signature("newInstance", BEAN_MAP, new Type[]{Constants.TYPE_OBJECT});
 	private static final Signature GET_PROPERTY_TYPE = TypeUtils.parseSignature("Class getPropertyType(String)");
 
-	public BladeBeanMapEmitter(ClassVisitor v, String className, Class type, int require) {
+	public BeanMapEmitter(ClassVisitor v, String className, Class type, int require) {
 		super(v);
 
 		begin_class(Constants.V1_2, Constants.ACC_PUBLIC, className, BEAN_MAP, null, Constants.SOURCE_FILE);
@@ -43,8 +43,8 @@ class BladeBeanMapEmitter extends ClassEmitter {
 		if (require != 0) {
 			for (Iterator it = allProps.keySet().iterator(); it.hasNext(); ) {
 				String name = (String) it.next();
-				boolean flag = (((require & BladeBeanMap.REQUIRE_GETTER) != 0) && !getters.containsKey(name)) ||
-					(((require & BladeBeanMap.REQUIRE_SETTER) != 0) && !setters.containsKey(name));
+				boolean flag = (((require & BeanMap.REQUIRE_GETTER) != 0) && !getters.containsKey(name)) ||
+					(((require & BeanMap.REQUIRE_SETTER) != 0) && !setters.containsKey(name));
 				if (flag) {
 					it.remove();
 					getters.remove(name);

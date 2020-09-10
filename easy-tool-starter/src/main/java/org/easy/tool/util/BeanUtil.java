@@ -20,8 +20,8 @@ package org.easy.tool.util;
 
 import lombok.experimental.UtilityClass;
 import org.easy.tool.beans.BeanProperty;
-import org.easy.tool.beans.BladeBeanCopier;
-import org.easy.tool.beans.BladeBeanMap;
+import org.easy.tool.beans.BeanCopier;
+import org.easy.tool.beans.BeanMap;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyAccessorFactory;
@@ -152,7 +152,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (source == null) {
 			return null;
 		}
-		BladeBeanCopier copier = BladeBeanCopier.create(sourceClazz, targetClazz, false);
+		BeanCopier copier = BeanCopier.create(sourceClazz, targetClazz, false);
 		T to = newInstance(targetClazz);
 		copier.copy(source, to, null);
 		return to;
@@ -203,7 +203,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (source == null || targetBean == null) {
 			return;
 		}
-		BladeBeanCopier copier = BladeBeanCopier
+		BeanCopier copier = BeanCopier
 			.create(source.getClass(), targetBean.getClass(), false);
 
 		copier.copy(source, targetBean, null);
@@ -223,7 +223,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (source == null || targetBean == null) {
 			return;
 		}
-		BladeBeanCopier copier = BladeBeanCopier
+		BeanCopier copier = BeanCopier
 			.create(source.getClass(), targetBean.getClass(), false, true);
 
 		copier.copy(source, targetBean, null);
@@ -296,7 +296,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (bean == null) {
 			return new HashMap<>(0);
 		}
-		return BladeBeanMap.create(bean);
+		return BeanMap.create(bean);
 	}
 
 	/**

@@ -3,7 +3,7 @@ package org.easy.tool.constant;
 
 
 /**
- * Blade系统配置类
+ * 系统配置类
  *
  */
 public class SystemConstant {

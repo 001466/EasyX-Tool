@@ -22,10 +22,9 @@ public interface TokenConstant {
 	static Integer AUTH_LENGTH = 7;
 	static String CLIENT_ID = "client_id";
 	static String OPENID="openid";
-	static String CHECK_TOKEN_URL="http://blade-auth/oauth/check_token";
+	static String CHECK_TOKEN_URL="http://auth/oauth/check_token";
 	static String AUTHORIZATION_CODE="authorization_code";
 
-//	String BLADE_HEADER="blade-auth";
 //	String AUTHORIZATION_CODE="authorization_code";
 //	String ACCOUNT = "account";
 //	String USER_ID = "user_id";

@@ -8,7 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.easy.secure.BladeUser;
+import org.easy.secure.User;
 import org.easy.secure.exception.SecureException;
 import org.easy.secure.constant.SecureConstant;
 import org.easy.secure.constant.TokenConstant;
@@ -31,25 +31,25 @@ import java.util.*;
  */
 @Slf4j
 public class SecureRawUtil  {
-	public final static String BLADE_USER_REQUEST_ATTR = "_BLADE_USER_REQUEST_ATTR_";
+	public final static String USER_REQUEST_ATTR = "_USER_REQUEST_ATTR_";
 
 	public static String BASE64_SECURITY = Base64.getEncoder().encodeToString(TokenConstant.SIGN_KEY.getBytes(Charsets.UTF_8));
 
-	public static BladeUser getUser(Claims claims) {
+	public static User getUser(Claims claims) {
 		if (claims == null) {
 			return null;
 		}
-		return BeanUtil.toBean(claims,BladeUser.class);
+		return BeanUtil.toBean(claims,User.class);
 	}
 
 
-	public static BladeUser getUser(HttpServletRequest request) {
+	public static User getUser(HttpServletRequest request) {
 		// 优先从 request 中获取
-		BladeUser bladeUser = null;
+		User user = null;
 
-		bladeUser=(BladeUser) request.getAttribute(BLADE_USER_REQUEST_ATTR);
-		if(bladeUser!=null){
-			return bladeUser;
+		user=(User) request.getAttribute(USER_REQUEST_ATTR);
+		if(user!=null){
+			return user;
 		}
 
 		String authorization = request.getHeader(TokenConstant.AUTHORIZATION);
@@ -57,27 +57,27 @@ public class SecureRawUtil  {
 			return null;
 		}
 
-		bladeUser=requestUserinfo(authorization);
-		if(bladeUser!=null){
-			request.setAttribute(BLADE_USER_REQUEST_ATTR, bladeUser);
-			return bladeUser;
+		user=requestUserinfo(authorization);
+		if(user!=null){
+			request.setAttribute(USER_REQUEST_ATTR, user);
+			return user;
 		}
 
-		bladeUser= getUser(getClaims(authorization));
-		if(bladeUser!=null){
-			request.setAttribute(BLADE_USER_REQUEST_ATTR, bladeUser);
+		user= getUser(getClaims(authorization));
+		if(user!=null){
+			request.setAttribute(USER_REQUEST_ATTR, user);
 		}
-		return bladeUser;
+		return user;
 	}
 
-	public static BladeUser getUser(org.springframework.web.server.ServerWebExchange exchange) {
+	public static User getUser(org.springframework.web.server.ServerWebExchange exchange) {
 		ServerHttpRequest request = exchange.getRequest();
 		// 优先从 request 中获取
-		BladeUser bladeUser = null;
+		User user = null;
 
-		bladeUser=(BladeUser) exchange.getAttribute(BLADE_USER_REQUEST_ATTR);
-		if(bladeUser!=null){
-			return bladeUser;
+		user=(User) exchange.getAttribute(USER_REQUEST_ATTR);
+		if(user!=null){
+			return user;
 		}
 
 		List<String> authorizations=request.getHeaders().get(TokenConstant.AUTHORIZATION);
@@ -90,28 +90,24 @@ public class SecureRawUtil  {
 		}
 
 
-		bladeUser=requestUserinfo(authorization);
-		if(bladeUser!=null){
-			exchange.getAttributes().put(BLADE_USER_REQUEST_ATTR, bladeUser);
-			return bladeUser;
+		user=requestUserinfo(authorization);
+		if(user!=null){
+			exchange.getAttributes().put(USER_REQUEST_ATTR, user);
+			return user;
 		}
 
-		bladeUser= getUser(getClaims(authorization));
-		if(bladeUser!=null){
-			exchange.getAttributes().put(BLADE_USER_REQUEST_ATTR, bladeUser);
+		user= getUser(getClaims(authorization));
+		if(user!=null){
+			exchange.getAttributes().put(USER_REQUEST_ATTR, user);
 		}
-		return bladeUser;
+		return user;
 	}
 
 
 
-	public static BladeUser getUserByAuthorization(String authorization)  {
+	public static User getUserByAuthorization(String authorization)  {
 
 		Claims claims = getClaimsByAuthorization(authorization);
-
-		if (claims == null) {
-			claims =getClaimsByBladeAuth(authorization);
-		}
 
 		if(claims==null){
 			return null;
@@ -125,15 +121,6 @@ public class SecureRawUtil  {
 
 	public static Claims getClaims(String authorization) {
 
-//		Claims claims=null;
-//		//Bladex-X 的auth
-//		String bladeAuth = request.getHeader(SecureRawUtil.HEADER);
-//		claims=getClaimsByBladeAuth(bladeAuth);
-//
-//		if(claims!=null){
-//			return claims;
-//		}
-
 		//后来加入的 auth
 		if(StringUtils.isEmpty(authorization)){
 		    return null;
@@ -146,18 +133,7 @@ public class SecureRawUtil  {
 		return SecureRawUtil.parseJWT(authorization);
 	}
 
-	public static Claims getClaimsByBladeAuth(String bladeAuth) {
 
-		if ((bladeAuth != null) && (bladeAuth.length() > TokenConstant.AUTH_LENGTH)) {
-			String headStr = bladeAuth.substring(0, 6).toLowerCase();
-			if (headStr.compareTo(TokenConstant.BEARER) == 0) {
-				bladeAuth = bladeAuth.substring(7);
-				return SecureRawUtil.parseJWT(bladeAuth);
-			}
-		}
-
-		return null;
-	}
 
 
 
@@ -313,7 +289,7 @@ public class SecureRawUtil  {
         staticUserInfoRestTemplate=restTemplate;
     }
 
-	public static BladeUser requestUserinfo(String authorization){
+	public static User requestUserinfo(String authorization){
 		try {
 
 
@@ -330,7 +306,7 @@ public class SecureRawUtil  {
 			}
 
 			String checkTokenUrl=TokenConstant.CHECK_TOKEN_URL+"?token="+token;
-			ResponseEntity<BladeUser> responseEntity= staticUserInfoRestTemplate.getForEntity(checkTokenUrl,BladeUser.class);
+			ResponseEntity<User> responseEntity= staticUserInfoRestTemplate.getForEntity(checkTokenUrl,User.class);
 			if(responseEntity.getStatusCodeValue()==200){
 				return responseEntity.getBody();
 			}else{

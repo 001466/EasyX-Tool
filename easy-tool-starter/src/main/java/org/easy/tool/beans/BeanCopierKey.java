@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor
-public class BladeBeanCopierKey {
+public class BeanCopierKey {
 	private final Class<?> source;
 	private final Class<?> target;
 	private final boolean useConverter;

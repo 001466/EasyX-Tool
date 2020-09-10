@@ -1,7 +1,6 @@
 package org.easy.tool.beans;
 
 import org.springframework.asm.ClassVisitor;
-import org.springframework.cglib.beans.BeanMap;
 import org.springframework.cglib.core.AbstractClassGenerator;
 import org.springframework.cglib.core.ReflectUtils;
 
@@ -11,15 +10,15 @@ import java.security.ProtectionDomain;
  * 重写 cglib BeanMap，支持链式bean
  *
  */
-public abstract class BladeBeanMap extends BeanMap {
-	protected BladeBeanMap() {
+public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
+	protected BeanMap() {
 	}
 
-	protected BladeBeanMap(Object bean) {
+	protected BeanMap(Object bean) {
 		super(bean);
 	}
 
-	public static BladeBeanMap create(Object bean) {
+	public static BeanMap create(Object bean) {
 		BladeGenerator gen = new BladeGenerator();
 		gen.setBean(bean);
 		return gen.create();
@@ -31,10 +30,10 @@ public abstract class BladeBeanMap extends BeanMap {
 	 * @return
 	 */
 	@Override
-	public abstract BladeBeanMap newInstance(Object o);
+	public abstract BeanMap newInstance(Object o);
 
 	public static class BladeGenerator extends AbstractClassGenerator {
-		private static final Source SOURCE = new Source(BladeBeanMap.class.getName());
+		private static final Source SOURCE = new Source(BeanMap.class.getName());
 
 		private Object bean;
 		private Class beanClass;
@@ -91,28 +90,28 @@ public abstract class BladeBeanMap extends BeanMap {
 		 * generated class will be reused if possible.
 		 * @return {BladeBeanMap}
 		 */
-		public BladeBeanMap create() {
+		public BeanMap create() {
 			if (beanClass == null) {
 				throw new IllegalArgumentException("Class of bean unknown");
 			}
 			setNamePrefix(beanClass.getName());
-			BladeBeanMapKey key = new BladeBeanMapKey(beanClass, require);
-			return (BladeBeanMap)super.create(key);
+			BeanMapKey key = new BeanMapKey(beanClass, require);
+			return (BeanMap)super.create(key);
 		}
 
 		@Override
 		public void generateClass(ClassVisitor v) throws Exception {
-			new BladeBeanMapEmitter(v, getClassName(), beanClass, require);
+			new BeanMapEmitter(v, getClassName(), beanClass, require);
 		}
 
 		@Override
 		protected Object firstInstance(Class type) {
-			return ((BeanMap)ReflectUtils.newInstance(type)).newInstance(bean);
+			return ((org.springframework.cglib.beans.BeanMap)ReflectUtils.newInstance(type)).newInstance(bean);
 		}
 
 		@Override
 		protected Object nextInstance(Object instance) {
-			return ((BeanMap)instance).newInstance(bean);
+			return ((org.springframework.cglib.beans.BeanMap)instance).newInstance(bean);
 		}
 	}
 

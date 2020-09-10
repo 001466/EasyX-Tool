@@ -9,15 +9,15 @@ import org.springframework.util.StringValueResolver;
  * 类型 转换 服务，添加了 IEnum 转换
  *
  */
-public class BladeConversionService extends ApplicationConversionService {
+public class ConversionService extends ApplicationConversionService {
 	@Nullable
-	private static volatile BladeConversionService SHARED_INSTANCE;
+	private static volatile ConversionService SHARED_INSTANCE;
 
-	public BladeConversionService() {
+	public ConversionService() {
 		this(null);
 	}
 
-	public BladeConversionService(@Nullable StringValueResolver embeddedValueResolver) {
+	public ConversionService(@Nullable StringValueResolver embeddedValueResolver) {
 		super(embeddedValueResolver);
 		super.addConverter(new EnumToStringConverter());
 		super.addConverter(new StringToEnumConverter());
@@ -27,19 +27,19 @@ public class BladeConversionService extends ApplicationConversionService {
 	 * Return a shared default application {@code ConversionService} instance, lazily
 	 * building it once needed.
 	 * <p>
-	 * Note: This method actually returns an {@link BladeConversionService}
+	 * Note: This method actually returns an {@link ConversionService}
 	 * instance. However, the {@code ConversionService} signature has been preserved for
 	 * binary compatibility.
-	 * @return the shared {@code BladeConversionService} instance (never{@code null})
+	 * @return the shared {@code ConversionService} instance (never{@code null})
 	 */
 	public static GenericConversionService getInstance() {
-		BladeConversionService sharedInstance = BladeConversionService.SHARED_INSTANCE;
+		ConversionService sharedInstance = ConversionService.SHARED_INSTANCE;
 		if (sharedInstance == null) {
-			synchronized (BladeConversionService.class) {
-				sharedInstance = BladeConversionService.SHARED_INSTANCE;
+			synchronized (ConversionService.class) {
+				sharedInstance = ConversionService.SHARED_INSTANCE;
 				if (sharedInstance == null) {
-					sharedInstance = new BladeConversionService();
-					BladeConversionService.SHARED_INSTANCE = sharedInstance;
+					sharedInstance = new ConversionService();
+					ConversionService.SHARED_INSTANCE = sharedInstance;
 				}
 			}
 		}
