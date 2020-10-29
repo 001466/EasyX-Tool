@@ -26,7 +26,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface UrlVersion {
+public @interface PathVersion {
 
 	/**
 	 * url 路径中的版本

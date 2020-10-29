@@ -35,7 +35,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @RequestMapping
-@UrlVersion
+@PathVersion
 @ProducesVersion
 @Validated
 public @interface VersionMapping {
@@ -90,17 +90,17 @@ public @interface VersionMapping {
 	String[] produces() default {};
 
 	/**
-	 * Alias for {@link UrlVersion#value}.
+	 * Alias for {@link PathVersion#value}.
 	 * @return {String}
 	 */
-	@AliasFor(annotation = UrlVersion.class, attribute = "value")
-	String urlVersion() default "";
+	@AliasFor(annotation = PathVersion.class, attribute = "value")
+	String pathVersion() default "";
 
 	/**
 	 * Alias for {@link ProducesVersion#value}.
 	 * @return {String}
 	 */
 	@AliasFor(annotation = ProducesVersion.class, attribute = "value")
-	String apiVersion() default "";
+	String producesVersion() default "";
 
 }

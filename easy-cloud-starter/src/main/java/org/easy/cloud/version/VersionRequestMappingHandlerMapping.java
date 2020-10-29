@@ -17,8 +17,8 @@
 package org.easy.cloud.version;
 
 
+import org.easy.cloud.annotation.PathVersion;
 import org.easy.cloud.annotation.ProducesVersion;
-import org.easy.cloud.annotation.UrlVersion;
 import org.easy.tool.util.StringPool;
 import org.easy.tool.util.StringUtil;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -56,10 +56,10 @@ public class VersionRequestMappingHandlerMapping extends org.springframework.web
 	@Nullable
 	private RequestMappingInfo getApiVersionMappingInfo(Method method, Class<?> handlerType) {
 		// url 上的版本，优先获取方法上的版本
-		UrlVersion urlVersion = AnnotatedElementUtils.findMergedAnnotation(method, UrlVersion.class);
+		PathVersion urlVersion = AnnotatedElementUtils.findMergedAnnotation(method, PathVersion.class);
 		// 再次尝试类上的版本
 		if (urlVersion == null || StringUtil.isBlank(urlVersion.value())) {
-			urlVersion = AnnotatedElementUtils.findMergedAnnotation(handlerType, UrlVersion.class);
+			urlVersion = AnnotatedElementUtils.findMergedAnnotation(handlerType, PathVersion.class);
 		}
 		// Media Types 版本信息
 		ProducesVersion apiVersion = AnnotatedElementUtils.findMergedAnnotation(method, ProducesVersion.class);
