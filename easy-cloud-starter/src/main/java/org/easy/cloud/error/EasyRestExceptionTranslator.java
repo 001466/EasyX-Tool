@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.util.NestedServletException;
 
 import javax.servlet.Servlet;
 
@@ -53,6 +54,22 @@ public class EasyRestExceptionTranslator {
 		/**
 		 * do ..
 		 */
+		return R.fail(ResultCode.INTERNAL_SERVER_ERROR, (Func.isEmpty(e.getMessage()) ? ResultCode.INTERNAL_SERVER_ERROR.getMessage() : e.getMessage()));
+	}
+
+	@ExceptionHandler(NestedServletException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public R handleError(NestedServletException e) {
+
+		log.error("系统错误", e);
+		//发送服务异常事件
+		/**
+		 * do ..
+		 */
+		log.error("自行毁灭。。。。");
+		log.error("。。。。原地爆炸");
+
+		System.exit(0);
 		return R.fail(ResultCode.INTERNAL_SERVER_ERROR, (Func.isEmpty(e.getMessage()) ? ResultCode.INTERNAL_SERVER_ERROR.getMessage() : e.getMessage()));
 	}
 
