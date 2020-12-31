@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -54,12 +52,11 @@ public class JobServiceImpl implements IJobService {
 
     @Override
     public QuartzJob saveJob(String jobName, String jobGroup, String description, Job cls, String cronExpression, String triggerName,JobDataMap jobDataMap) throws SchedulerException {
-
         //删除旧任务
         scheduler.deleteJob(new JobKey(jobName, jobGroup));
 
         //构建job信息
-        JobDetail job = JobBuilder.newJob(cls.getClass()).withIdentity(jobName, jobGroup).withDescription(description). usingJobData(jobDataMap) .build();
+        JobDetail job = JobBuilder.newJob(cls.getClass()).withIdentity(jobName, jobGroup).withDescription(description).usingJobData(jobDataMap).build();
          // 触发时间点
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression.trim());
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroup).startNow().withSchedule(cronScheduleBuilder).build();
@@ -70,6 +67,21 @@ public class JobServiceImpl implements IJobService {
         log.info("{} New Job: {}" ,scheduler.getSchedulerName(), quartzJob);
         return quartzJob;
 
+    }
+
+    @Override
+    public QuartzJob saveJob(String jobName, String jobGroup, String description, Job job, Long delayTime, TimeUnit unit, String triggerName, JobDataMap jobDataMap) throws SchedulerException {
+        if(delayTime==null){
+            delayTime=0L;
+        }
+        JobDetail jobDetail=JobBuilder.newJob(job.getClass()).withIdentity(jobName, jobGroup).withDescription(description).usingJobData(jobDataMap).storeDurably().build();
+        SimpleScheduleBuilder scheduleBuilder =SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(Integer.parseInt(String.valueOf( unit.toSeconds(delayTime) ))).withRepeatCount(1);
+        Trigger trigger= TriggerBuilder.newTrigger().forJob(jobDetail).withIdentity(jobName, jobGroup).withSchedule(scheduleBuilder).build();
+        Date date=scheduler.scheduleJob(jobDetail,trigger);
+        QuartzJob quartzJob = new QuartzJob(jobName, jobGroup, description, job.getClass().getName(), date.toString(), triggerName);
+        putDataMap(jobDetail, quartzJob);
+        log.info("{} New Job: {}" ,scheduler.getSchedulerName(), quartzJob);
+        return quartzJob;
     }
 
     @Override

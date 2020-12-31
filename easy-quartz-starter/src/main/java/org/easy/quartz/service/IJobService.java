@@ -7,12 +7,14 @@ import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public interface IJobService {
 
 
 
     QuartzJob saveJob(String jobName, String jobGroup, String description, Job job, String cronExpression, String triggerName, JobDataMap jobDataMap) throws SchedulerException;
+    QuartzJob saveJob(String jobName, String jobGroup, String description, Job job, Long delayTime, final TimeUnit unit, String triggerName, JobDataMap jobDataMap) throws SchedulerException;
 
 
     /**

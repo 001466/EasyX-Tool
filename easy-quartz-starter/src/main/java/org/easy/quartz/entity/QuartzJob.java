@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class QuartzJob  {
+public class QuartzJob {
 	
 	private String jobName;//任务名称
 	private String jobGroup;//任务分组
