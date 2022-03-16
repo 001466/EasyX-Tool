@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89fdb7f3-879e-4fad-898c-5d2689e089ea" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/easy-cloud-starter/src/main/java/org/easy/cloud/config/AsyncThreadPoolConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy-cloud-starter/src/main/resources/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/easy-cloud-starter/src/main/resources/META-INF/spring.factories" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy-log-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/easy-log-starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy-log-starter/src/main/java/org/easy/log/aspect/RequestLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/easy-log-starter/src/main/java/org/easy/log/aspect/RequestLogAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy-log/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/easy-log/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy-log/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/easy-log/src/main/resources/logback-spring.xml" afterDir="false" />
-    </list>
+    <list default="true" id="89fdb7f3-879e-4fad-898c-5d2689e089ea" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/easy-log/target/" />
@@ -73,7 +65,7 @@
       <find>deocean</find>
       <find>BaseEntityWrapper</find>
       <find>RequestMappingHandlerMapping</find>
-      <find>Author: Chill</find>
+      <find />
       <find>Chill</find>
       <find>@author</find>
       <find>blade</find>
@@ -173,7 +165,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
