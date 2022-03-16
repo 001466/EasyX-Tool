@@ -5,7 +5,7 @@
 	<springProperty scope="context" name="logging.path" source="logging.path" defaultValue="logs"/>
 	<springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
 	<springProperty scope="context" name="logging.level.root" source="logging.level.root" defaultValue="INFO"/>
-
+	<springProperty scope="context" name="logging.retain" source="logging.retain" defaultValue="3"/>
 
 
 	<property name="MY_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [${spring.application.name:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] ${PID:-} --- [%thread] %logger: \t%msg%n"/>
@@ -29,9 +29,9 @@
 		</encoder>
 	
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">  
-			<FileNamePattern>${logging.path}/all/${spring.application.name}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<FileNamePattern>${logging.path}/all/${spring.application.name}.%d{yyyy-MM-dd}.${PID:-}.%i.log</FileNamePattern>
 	        <maxFileSize>64MB</maxFileSize>
-	        <maxHistory>60</maxHistory>
+	        <maxHistory>${logging.retain}</maxHistory>
 	    </rollingPolicy>  
 
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -51,6 +51,37 @@
 		<appender-ref ref="ALL_FILE" />
 	</appender>
 
+
+
+	<appender name="REQUEST_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender" >
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${MY_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>${logging.path}/request/${spring.application.name}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<maxFileSize>64MB</maxFileSize>
+			<maxHistory>${logging.retain}</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+				<expression>logger.contains("org.easy.log.aspect.RequestLogAspect")</expression>
+			</evaluator>
+			<OnMatch>ACCEPT</OnMatch>
+			<OnMismatch>DENY</OnMismatch>
+		</filter>
+	</appender>
+
+	<!-- 异步输出 -->
+	<appender name="REQUEST_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>16</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref="REQUEST_FILE" />
+	</appender>
+
 	<!-- 按照每天生成日志文件 -->
 	<appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
@@ -63,7 +94,7 @@
 			<!--日志文件输出的文件名 -->
 			<FileNamePattern>${logging.path}/warn/${spring.application.name}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
 	        <maxFileSize>64MB</maxFileSize>
-	        <maxHistory>60</maxHistory>  
+			<maxHistory>${logging.retain}</maxHistory>
 	    </rollingPolicy>  
 
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -96,7 +127,7 @@
 			<!--日志文件输出的文件名 -->
 			<FileNamePattern>${logging.path}/error/${spring.application.name}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
 	        <maxFileSize>64MB</maxFileSize>
-	        <maxHistory>60</maxHistory>  
+			<maxHistory>${logging.retain}</maxHistory>
 	    </rollingPolicy>  
 
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -120,7 +151,7 @@
 
 	<!--<appender name="LOGSTASH"
 		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-		<remoteHost>www.baidu.net</remoteHost>
+		<remoteHost>deocean.net</remoteHost>
 		<port>9800</port>
 		<encoder charset="UTF-8"
 			class="net.logstash.logback.encoder.LogstashEncoder">
@@ -133,7 +164,7 @@
 	<!-- 为logstash输出的JSON格式的Appender -->
 	<appender name="LOGSTASH"
 			  class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-		<destination>baidu.com:9800</destination>
+		<destination>deocean.net:9800</destination>
 		<!-- 日志输出编码 -->
 		<encoder
 				class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
@@ -169,7 +200,7 @@
 		</encoder>
 	</appender>
 
-	
+
 	<!--
 	<appender name="ERR_MAIL" class="ch.qos.logback.classic.net.SMTPAppender">
 	    <smtpHost>${spring.mail.host}</smtpHost>
@@ -191,27 +222,10 @@
 	<!-- 日志输出级别 -->
 	<root level="${logging.level.root}">
 
-		<!-- 
-		<appender-ref ref="LOGSTASH" />
-		<appender-ref ref="ALL_FILE_ASYNC"/> 
-		<appender-ref ref="STDOUT" /> 
-			
-			
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="HTTP" />
-		<appender-ref ref="STDOUT" />
-
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="HTTP" />
-		
-		<appender-ref ref="ALL_FILE_ASYNC" />
-		<appender-ref ref="WARN_FILE_ASYNC" />
-		<appender-ref ref="ERR_FILE_ASYNC" />
-		-->
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ALL_FILE_ASYNC"/>
 		<appender-ref ref="ERR_FILE_ASYNC" />
-
+		<appender-ref ref="REQUEST_FILE_ASYNC" />
 
 	</root>
 </configuration>
